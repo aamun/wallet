@@ -1,0 +1,8 @@
+config.php
+.buildpath
+.project
+.settings/
+# netbeans project
+nbproject/*
+nbproject/*/*
+.DS_Store
