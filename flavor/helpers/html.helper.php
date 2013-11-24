@@ -144,8 +144,8 @@ class Html extends Singleton {
 		return $html;
 	}
 
-	public function linkToConfirm($text, $url=""){
-		$html = $this->linkTo($text, $url, "onclick=\"return confirm('Are you sure?');\"");
+	public function linkToConfirm($text, $url="", $html_attributes = ""){
+		$html = $this->linkTo($text, $url, "onclick=\"return confirm('Are you sure?');\" {$html_attributes}");
 		return $html;
 	}
 
