@@ -2,9 +2,19 @@
 /**
 * Login_controller
 */
-class Login_controller extends AppController
-{
+class Login_controller extends AppController {	
+
+	/**
+	 * Log in user
+	 * @return void
+	 */
 	public function index($id = null){
+
+		// if user is sign in
+		if ($this->session->check('login')) {
+			// Redirect to dashboard
+			$this->redirect("users/dashboard");
+		}
 
 		$user = new User();
 		if ($this->data && isset($this->data['email']) && isset($this->data['password'])) {
@@ -12,6 +22,7 @@ class Login_controller extends AppController
 				
 				// Set user data in session
 				$this->session['login'] = true;
+				$this->session['idUser'] = $user['idUser'];
 
 				// Redirect to dashboard
 				$this->redirect('users/dashboard');
@@ -22,8 +33,19 @@ class Login_controller extends AppController
 		$this->render();
 	}
 
+	/**
+	 * Log out user
+	 *
+	 * @return void
+	 */
 	public function logout(){
-		$this->session->destroy();
+
+		// Destroy session
+		$this->session->destroy('login');
+		$this->session->destroy('idUser');
+
+		// Redirect to index page
+		$this->redirect('index');
 	}
 }
 ?>
