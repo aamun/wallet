@@ -27,12 +27,24 @@ class Users_controller extends AppController {
      */
     public function create(){
 
+        // If user is current login
+        if ($this->session->check('login')) {
+            // Redirect to users dashboard
+            $this->redirect('users/dashboard');
+        }
+
         $user = new User();
 
         if ($this->data) {
             $user->prepareFromArray($this->data);
             if ($user->save()) {
                 $this->messages->addMessage(Message::SUCCESS, "User saved.");
+
+                // Set user data in session
+                $this->session['login'] = true;
+                $this->session['idUser'] = $user['idUser'];
+                
+                $this->redirect('users/dashboard');
             } else {
                 // $this->messages->addMessage(Message::ERROR, "Ups somethings is wrong.");
             }
@@ -116,6 +128,12 @@ class Users_controller extends AppController {
     }
 
     public function dashboard(){
+
+        if (!$this->session->check('login')) {
+            $this->redirect('login');
+        }
+
+        $this->view->setLayout('panel');
         $this->render();
     }
 }
