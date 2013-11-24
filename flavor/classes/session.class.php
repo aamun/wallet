@@ -5,6 +5,9 @@ class Session extends Singleton implements ArrayAccess {
 	public function __construct() {
 		if (!isset($_SESSION)) {
 			session_start();
+			if (!isset($_SESSION['flavor_fwk_session'])) {
+				$_SESSION['flavor_fwk_session'] = array();
+			}
 		}
 	}
 	
