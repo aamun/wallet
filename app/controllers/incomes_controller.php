@@ -8,20 +8,38 @@
 class Incomes_controller extends AppController {
 
     /**
-     * Incomes List 
-     * 
-     * @param int $pag
-     * @return void
+     *
+     *
      */
-    public function index($pag = null){
-
+    public function beforeDispach(){
         if (!$this->session->check('login')) {
             $this->redirect('login');
         }
+    }
+
+    /**
+     * Incomes List 
+     * 
+     * @param int $page
+     * @return void
+     */
+    public function index($page = null){
 
         
+        // Pagination
+        $page = is_null($page) || !is_numeric($page) ? 1 : $page;
+        $limit = 10;
+        $offset = (($page-1) * $limit);
+        $limitQuery = $offset.",".$limit;
+        $targetpage = $this->path.'incomes/';
+
         $income = new Income();
-        $this->view->incomes = $income->findAll(null, null, null, "WHERE idUser = '{$this->session['idUser']}'");
+        $this->view->incomes = $income->findAll(null, null, $limitQuery, "WHERE idUser = '{$this->session['idUser']}' ORDER BY income_date");
+
+        // Total rows
+        $totalRows = $income->getTotal();
+        $this->view->pagination = $this->pagination->init($totalRows, $page, $limit, $targetpage);
+
         $this->view->setLayout('panel');
         $this->render();
     }
@@ -34,11 +52,16 @@ class Incomes_controller extends AppController {
     public function create(){
 
         $income = new Income();
+        $income['income_date'] = date('Y-m-d');
 
         if ($this->data) {
             $income->prepareFromArray($this->data);
+            // Set user id
+            $income['idUser'] = $this->session['idUser'];
+
             if ($income->save()) {
                 $this->messages->addMessage(Message::SUCCESS, "Yay money!!!");
+                $this->redirect('incomes');
             } else {
                 $this->messages->addMessage(Message::ERROR, "Ups somethings is wrong with my bag.");
             }
@@ -89,6 +112,7 @@ class Incomes_controller extends AppController {
             $income->prepareFromArray($this->data);
             if ($income->save()) {
                 $this->messages->addMessage(Message::SUCCESS, "Yay money!!!");
+                $this->redirect('incomes');
             } else {
                 $this->messages->addMessage(Message::ERROR, "Ups somethings is wrong with my bag.");
             }
