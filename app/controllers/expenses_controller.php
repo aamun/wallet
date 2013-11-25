@@ -47,8 +47,10 @@ class Expenses_controller extends AppController {
 
         if ($this->data) {
             $expense->prepareFromArray($this->data);
+            $expense['idUser'] = $this->session['idUser'];
             if ($expense->save()) {
                 $this->messages->addMessage(Message::SUCCESS, "Expense saved.");
+                $this->redirect("expenses");
             } else {
                 $this->messages->addMessage(Message::ERROR, "Ups somethings is wrong with my bag.");
             }
