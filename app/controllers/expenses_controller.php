@@ -27,12 +27,21 @@ class Expenses_controller extends AppController {
      * @param int $pag
      * @return void
      */
-    public function index($pag = null){
-        // TODO: Add pagination
-        $expense = new Expense();
-        $this->view->expenses = $expense->findAll();
+    public function index($page = null){
+        
+        // Calculate pagination
+        $page = is_null($page) || !is_numeric($page) ? 1 : $page;
+        $limit = 10;
+        $offset = (($page-1) * $limit);
+        $limitQuery = $offset.",".$limit;
+        $targetpage = $this->path.'incomes/';
 
-        $this->view->pagination = "";
+        // Get expenses
+        $expense = new Expense();
+        $this->view->expenses = $expense->findAll(null, null, $limitQuery, "WHERE idUser = {$this->session['idUser']} ORDER BY expense_date");
+
+        // Init pagination
+        $this->view->pagination = $this->pagination->init($expense->getTotal(), $page, $limit, $targetpage);
         $this->render();
     }
 
