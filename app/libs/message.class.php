@@ -9,7 +9,7 @@
 class Message extends singleton implements ArrayAccess{
     
     const INFORMATION = 'info';
-    const ERROR = 'error';
+    const ERROR = 'danger';
     const WARNING = 'warning';
     const SUCCESS = 'success';
 

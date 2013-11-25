@@ -4,6 +4,9 @@
 */
 class Login_controller extends AppController {	
 
+	public function beforeRender(){
+		$this->view->setLayout('index');
+	}
 	/**
 	 * Log in user
 	 * @return void
@@ -26,6 +29,8 @@ class Login_controller extends AppController {
 
 				// Redirect to dashboard
 				$this->redirect('users/dashboard');
+			} else {
+				$this->messages->addMessage(Message::WARNING, "Wrong Username/Email and password combination.");
 			}
 		}
 

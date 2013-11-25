@@ -50,6 +50,7 @@ class Users_controller extends AppController {
             }
         }
 
+        $this->view->setLayout('index');
         $this->view->user = $user;
         $this->render();
     }
