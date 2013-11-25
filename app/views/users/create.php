@@ -1,5 +1,7 @@
 <h2>Sign up</h2>
 
+<?php $this->renderElement('messages'); ?>
+
 <?php echo $this->html->form("users/create", 'POST', 'role="form" class="form-horizontal"'); ?>
 	<div class="form-group">
 		<label for="username" class="col-sm-2 control-label">Username:</label>

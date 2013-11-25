@@ -1,4 +1,6 @@
-<h1>Login</h1>
+<h2>Login</h2>
+
+<?php $this->renderElement('messages'); ?>
 
 <?php echo $this->html->form("login", 'POST', 'role="form" class="form-horizontal"'); ?>
     <div class="form-group">
