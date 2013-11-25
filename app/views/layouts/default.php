@@ -9,11 +9,10 @@
         <?php echo $this->html->includeCSS('bootstrap.min'); ?>
         <?php //echo $this->html->includeCSS('bootstrap-theme.min'); ?>
 
-        <?php echo $this->html->includeJs('jquery-1.9.1'); ?>
+        <?php echo $this->html->includeJs('jquery-1.10.2.min'); ?>
+        <?php echo $this->html->includeJs('bootstrap.min'); ?>
 	</head>
     <body>
-        <div class="container">
-            <?php echo $content_for_layout ?>
-        </div>
+        <?php echo $content_for_layout ?>
     </body>
 </html>
