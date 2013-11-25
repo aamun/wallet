@@ -7,6 +7,7 @@ class Index_controller extends AppController{
 	
 	public function index($pag = null){		
 		
+		$this->view->setLayout('index');
 		$this->render();
 	}
 }
