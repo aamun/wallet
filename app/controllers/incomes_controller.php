@@ -17,6 +17,11 @@ class Incomes_controller extends AppController {
         }
     }
 
+    public function beforeRender(){
+        parent::beforeRender();
+        $this->view->activeDashboardMenu = array('', '', 'active');
+    }
+
     /**
      * Incomes List 
      * 
