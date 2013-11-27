@@ -13,7 +13,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label">Description:</label>
     <div class="col-md-10">
-        <textarea class="form-control" rows="3"><?php echo $income['description']; ?></textarea>
+        <textarea class="form-control" rows="3" name="description"><?php echo $income['description']; ?></textarea>
     </div>
 </div>
 <div class="form-group">
