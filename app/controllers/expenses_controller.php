@@ -20,7 +20,10 @@ class Expenses_controller extends AppController {
     }
 
     public function beforeRender(){
+        parent::beforeRender();
+        
         $this->view->setLayout('panel');
+        $this->view->activeDashboardMenu = array('', 'active', '');
     }
 
     /**
@@ -55,7 +58,8 @@ class Expenses_controller extends AppController {
     public function create(){
 
         $expense = new Expense();
-
+        $expense['expense_date'] = date("Y-m-d");
+        
         if ($this->data) {
             $expense->prepareFromArray($this->data);
             $expense['idUser'] = $this->session['idUser'];

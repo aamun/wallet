@@ -134,6 +134,7 @@ class Users_controller extends AppController {
             $this->redirect('login');
         }
 
+        $this->view->activeDashboardMenu = array('active', '', '');
         $this->view->setLayout('panel');
         $this->render();
     }

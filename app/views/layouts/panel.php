@@ -27,9 +27,9 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><?php echo $this->html->linkTo("Dashboard", "users/dashboard"); ?></li>
-                        <li><?php echo $this->html->linkTo("Incomes", 'incomes'); ?></li>
-                        <li><?php echo $this->html->linkTo("Expenses", "expenses"); ?></li>
+                        <li class="<?php echo $activeDashboardMenu[0]; ?>"><?php echo $this->html->linkTo("Dashboard", "users/dashboard"); ?></li>
+                        <li class="<?php echo $activeDashboardMenu[1]; ?>"><?php echo $this->html->linkTo("Expenses", "expenses"); ?></li>
+                        <li class="<?php echo $activeDashboardMenu[2]; ?>"><?php echo $this->html->linkTo("Incomes", 'incomes'); ?></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><?php echo $this->html->linkTo("Logout", "login/logout"); ?></li>
