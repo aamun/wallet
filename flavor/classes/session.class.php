@@ -60,7 +60,7 @@ class Session extends Singleton implements ArrayAccess {
 	}
 	
 	public function offsetGet($offset) {
-		return $_SESSION["flavor_fwk_session"][$offset];
+		return isset($_SESSION["flavor_fwk_session"][$offset]) ? $_SESSION["flavor_fwk_session"][$offset] : null;
 	}
 
 	public function offsetUnset($offset) {
