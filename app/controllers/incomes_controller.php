@@ -11,10 +11,12 @@ class Incomes_controller extends AppController {
      *
      *
      */
-    public function beforeDispach(){
+    public function beforeDispatch(){
         if (!$this->session->check('login')) {
             $this->redirect('login');
         }
+
+        parent::beforeDispatch();
     }
 
     public function beforeRender(){
